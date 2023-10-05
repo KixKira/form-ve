@@ -3,14 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  --foreground-rgb: 0, 187, 236;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --form-control-color: 0, 187, 236;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
+    --foreground-rgb: 0, 187, 236;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
@@ -40,28 +41,71 @@ h2 {
   letter-spacing: 0.025em;
   color: rgb(50, 50, 50);
   font-weight: 700;
-  font-size: 22px;
+  font-size: 36px;
   width: 100%;
 }
 
-.labelSection {
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-  color: rgb(55, 65, 81);
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 8px;
+.input-wrapper {
+  position: relative;
+  line-height: 14px;
+  margin: 0 10px;
+  display: inline-block;
 }
 
-.divisorParent {
+.label-input {
+  color: #505050;
+  font-size: 12px;
+  text-transform: uppercase;
+  position: absolute;
+  z-index: 2;
+  left: 20px;
+  top: 14px;
+  padding: 0 2px;
+  pointer-events: none;
+  transition: transform 100ms ease;
+  transform: translateY(-28px);
+  font-weight: 700;
+}
+
+.input-field {
+  font-size: 16px;
+  color: #B0B0B0;
+  outline: none;
+  border: 1px solid #7070708D;
+  padding: 10px 20px;
+  border-radius: 5px;
+  position: relative;
+
+  &:invalid + .label-input {
+    transform: translateY(0);
+  }
+
+  &:focus {
+    border-color: #00bbec;
+
+    & + .label-input {
+      color: #00bbec;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+select {
+  background: white;
+}
+
+.sections {
   display: flex;
   flex-wrap: wrap;
-  margin: 24px 12px
+  padding: 25px;
+  background-color: #88dbdf;
+  border-radius: 25px;
+  margin-bottom: 35px;
 }
 
-.divisorQuestions {
-  width: 100%;
-  padding-left: 12px;
-  padding-right: 12px;
-  margin-bottom: 24px;
+.label-checkbox {
+  letter-spacing: 0.025em;
+  color: rgb(55, 65, 81);
+  font-size: 16px;
+  margin-left: 8px;
 }

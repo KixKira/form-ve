@@ -50,43 +50,54 @@ const EvaluacionControl: React.FC<EvaluacionControlProps> = ({
     }
 
     return (
-      <div className="divisorParent">
-        <h2>Evaluacion de control</h2>
-        <div className="divisorQuestions md:w-1/3 md:mb-0">
-          <label htmlFor="estatura" className="labelSection">
-            Estatura (cm)
-          </label>
-          <input
-            type="number"
-            id="estatura"
-            value={estaturaInput}
-            onChange={manejarEstaturaInput}
-            className="appearance-none w-full bg-gray-200 text-gray-700 border rounded py-1 px-2 mb-3 leading-tight"
-          />
+      <div className="sections">
+        <h2 className="font-sans">Evaluacion de control</h2>
+        <div className="mt-14 w-1/3">
+          <div className="input-wrapper w-full">
+            <label htmlFor="estatura" className="label-input">
+              Estatura (cm)
+            </label>
+            <div className="mt-3"></div>
+            <input
+              type="text"
+              id="estatura"
+              value={estaturaInput}
+              onChange={manejarEstaturaInput}
+              className="input-field"
+              placeholder="Ejemplo: 195mtrs"
+            />
+          </div>
         </div>
-        <div className="divisorQuestions md:w-1/3 md:mb-0">
-          <label htmlFor="peso" className="labelSection">
-            Peso (Kg)
-          </label>
-          <input
-            type="number"
-            id="peso"
-            value={pesoInput}
-            onChange={manejarPesoInput}
-            className="appearance-none w-full bg-gray-200 text-gray-700 border rounded py-1 px-2 mb-3 leading-tight"
-          />
+        <div className="mt-14 w-1/3">
+          <div className="input-wrapper w-full">
+            <label htmlFor="peso" className="label-input">
+              Peso (Kg)
+            </label>
+            <div className="mt-3"></div>
+            <input
+              type="text"
+              id="peso"
+              value={pesoInput}
+              onChange={manejarPesoInput}
+              className="input-field"
+              placeholder="Ejemplo: 300Kg"
+            />
+          </div>
         </div>
-        <div className="divisorQuestions md:w-1/3 md:mb-0">
-          <label htmlFor="cintura" className="labelSection">
-            Cintura (cm)
-          </label>
-          <input
-            type="number"
-            id="cintura"
-            value={cinturaInput}
-            onChange={manejarCinturaInput}
-            className="appearance-none w-full bg-gray-200 text-gray-700 border rounded py-1 px-2 mb-3 leading-tight"
-          />
+        <div className="mt-14 w-1/3">
+        <div className="input-wrapper w-full">
+            <label htmlFor="cintura" className="label-input">
+              Cintura (cm)
+            </label>
+            <input
+              type="text"
+              id="cintura"
+              value={cinturaInput}
+              onChange={manejarCinturaInput}
+              className="input-field"
+              placeholder="Ejemplo: 20cm"
+            />
+          </div>
         </div>
         {imc !== null && <p>Tu IMC es {imc.toFixed(1)}</p>}
       </div>
