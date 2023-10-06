@@ -43,10 +43,17 @@ const DatosPersonales: React.FC<DatosPersonalesProps> = (props) => {
 
   const [fechaHora, setFechaHora] = useState("");
   const [botonHabilitado, setBotonHabilitado] = useState(false);
+  const [nombreError, setNombreError] = useState("");
+  const [cedulaPasaporteError, setCedulaPasaporteError] = useState("");
+  const [fechaNacimientoError, setFechaNacimientoError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [telefonoError, setTelefonoError] = useState("");
+  const [sexoError, setSexoError] = useState("");
+  const [embazarazadaError, setEmbarazadaError] = useState("");
 
   useEffect(() => {
     const intervalo = setInterval(() => {
-      setFechaHora(new Date().toLocaleDateString());
+      setFechaHora(new Date().toLocaleDateString('es-ES'));
     }, 1000);
 
     return () => clearInterval(intervalo);
@@ -59,12 +66,71 @@ const DatosPersonales: React.FC<DatosPersonalesProps> = (props) => {
       setBotonHabilitado(false);
     }
   }, [sexo, embarazada]);
+
+  const validarCamposRequeridos = () => {
+    console.log(validarCamposRequeridos);
+    let esValido = true;
+
+    if (!nombre) {
+      setNombreError("Este campo es requerido");
+      console.log("Nombre vacio");
+      esValido = false;
+    } else {
+      setNombreError("");
+    }
+
+    if (!cedulaPasaporte) {
+      setCedulaPasaporteError("Este campo es requerido");
+      esValido = false;
+    } else {
+      setCedulaPasaporteError("");
+    }
+
+    if (!fechaNacimiento) {
+      setFechaNacimientoError("Este campo es requerido");
+      esValido = false;
+    } else {
+      setFechaNacimientoError("");
+    }
+
+    if (!email) {
+      setEmailError("Este campo es requerido");
+      esValido = false;
+    } else {
+      setEmailError("");
+    }
+
+    if (!telefono) {
+      setTelefonoError("Este campo es requerido");
+      esValido = false;
+    } else {
+      setTelefonoError("");
+    }
+
+    if (sexo === "") {
+      setSexoError("Este campo es requerido");
+      esValido = false;
+    } else {
+      setSexoError("");
+    }
+
+    if (embarazada === "") {
+      setEmbarazadaError("Este campo es requerido");
+      esValido = false;
+    } else {
+      setEmbarazadaError("");
+    }
+
+    return esValido;
+  };
   
   const avanzar = () => {
     if (embarazada === "SI") {
       alert("Gracias por su tiempo");
     } else {
-      avanzarComponente();
+      if (validarCamposRequeridos()) {
+        avanzarComponente();
+      }
     }
   };
 
@@ -82,9 +148,10 @@ const DatosPersonales: React.FC<DatosPersonalesProps> = (props) => {
             value={nombre}
             onChange={(evento) => setNombre(evento.target.value)}
             required
-            className="input-field"
-            placeholder="Bashir Al-Hassan Amrabat"
+            className="input-field focus:text-black"
+            placeholder="John Doe"
           />
+          {nombreError && <span className="text-red-500">{nombreError}</span>}
         </div>
         <div className="input-wrapper">
           <label htmlFor="fechaHora" className="label-input">
@@ -111,6 +178,7 @@ const DatosPersonales: React.FC<DatosPersonalesProps> = (props) => {
             className="input-field"
             placeholder="001-0000000-1"
           />
+          {cedulaPasaporteError && <span className="text-red-500">{cedulaPasaporteError}</span>}
         </div>
         <div className="input-wrapper">
           <label htmlFor="fechaNacimiento" className="label-input">
@@ -119,11 +187,12 @@ const DatosPersonales: React.FC<DatosPersonalesProps> = (props) => {
           <input
             type="date"
             id="fechaNacimiento"
-            value={fechaNacimiento}
+            value={(fechaNacimiento)}
             onChange={(evento) => setFechaNacimiento(evento.target.value)}
             required
             className="input-field"
           />
+          {fechaNacimientoError && <span className="text-red-500">{fechaNacimientoError}</span>}
         </div>
         <div className="input-wrapper">
           <label htmlFor="email" className="label-input">
@@ -138,6 +207,7 @@ const DatosPersonales: React.FC<DatosPersonalesProps> = (props) => {
             className="input-field"
             placeholder="mail@example.com"
           />
+          {emailError && <span className="text-red-500">{emailError}</span>}
         </div>
       </div>
       <div className="mt-8">
@@ -154,6 +224,7 @@ const DatosPersonales: React.FC<DatosPersonalesProps> = (props) => {
             className="input-field"
             placeholder="1-809 829849"
           />
+          {telefonoError && <span className="text-red-500">{telefonoError}</span>}
         </div>
         <div className="input-wrapper">
           <label htmlFor="ocupacion" className="label-input">
@@ -164,7 +235,6 @@ const DatosPersonales: React.FC<DatosPersonalesProps> = (props) => {
             id="ocupacion"
             value={ocupacion}
             onChange={(evento) => setOcupacion(evento.target.value)}
-            required
             className="input-field"
             placeholder="Ingeniero en Informática"
           />
@@ -184,6 +254,7 @@ const DatosPersonales: React.FC<DatosPersonalesProps> = (props) => {
             <option value="MASCULINO">Masculino</option>
             <option value="FEMENINO">Femenino</option>
           </select>
+          {sexoError && <span className="text-red-500">{sexoError}</span>}
         </div>
         {sexo === "FEMENINO" && (
           <div className="input-wrapper">
@@ -201,6 +272,7 @@ const DatosPersonales: React.FC<DatosPersonalesProps> = (props) => {
               <option value="SI">Sí</option>
               <option value="NO">No</option>
             </select>
+            {embazarazadaError && <span className="text-red-500">{embazarazadaError}</span>}
           </div>
         )}
         {embarazada === "SI" && (

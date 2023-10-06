@@ -43,11 +43,29 @@ const EvaluacionControl: React.FC<EvaluacionControlProps> = ({
 
     function calcularIMC() {
       if (estatura && peso) {
-        return peso / (estatura / 100) ** 2;
+        const imc = peso / (estatura / 100) ** 2;
+        const puntaje = puntajeIMC(imc);
+        return {imc, puntaje};
       } else {
-        return null;
+        return { imc: null, puntaje: 0 };
       }
     }
+
+    function puntajeIMC(imc: number) {
+      if (imc >= 25 && imc <= 29.9) {
+        return 1
+      } else if (imc >= 30 && imc <= 34.9) {
+        return 2
+      } else if (imc >= 35 && imc <= 39.9) {
+        return 3
+      } else if (imc >= 40) {
+        return 4
+      } else {
+        return 0
+      }
+    }
+
+    const { imc: imcValue, puntaje: puntajeIMCValue } = calcularIMC();
 
     return (
       <div className="sections">
@@ -99,7 +117,10 @@ const EvaluacionControl: React.FC<EvaluacionControlProps> = ({
             />
           </div>
         </div>
-        {imc !== null && <p>Tu IMC es {imc.toFixed(1)}</p>}
+        {imcValue !== null && <p>Tu IMC es {imcValue.toFixed(1)}</p>}
+        <div className="mt-4">
+          <p>Tu puntaje actual es: {puntajeIMCValue}</p>
+        </div>
       </div>
     );
 };

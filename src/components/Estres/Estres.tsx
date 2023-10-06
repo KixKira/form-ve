@@ -20,13 +20,41 @@ export default function Estres(props: EstresProps) {
         setCapacidadModificarEstiloVida,
     } = props;
 
-    const [ratingValue, setRatingValue] = useState(undefined);
+    const [puntajeRating, setPuntajeRating] = useState<number | undefined>(
+      undefined
+    );
 
     const handleRatingAction = (value: any) => {
       if (Number.isInteger(value)) {
-        setRatingValue(value);
+        setPuntajeRating(value);
       }
     };
+
+    function puntajeEstres() {
+      let points = 0
+      if (sienteEstres.valueOf()) {
+        points += 1
+        if (typeof puntajeRating === "number") {
+          if (puntajeRating >= 7 && puntajeRating <= 10) {
+            points += 3
+          } else if (puntajeRating >= 4 && puntajeRating <= 6) {
+            points += 2
+          } else if (puntajeRating >= 1 && puntajeRating <=3) {
+            points += 1;
+          }
+        }
+      }
+      if (!sintomasSaludMental.includes("NINGUNA")) {
+        points += 2
+      }
+      if (!capacidadModificarEstiloVida.valueOf()) {
+        points += 1
+      }
+      
+      return points
+    }
+
+    const puntajeTotal = puntajeEstres();
     
     return (
       <div className="sections">
@@ -206,6 +234,9 @@ export default function Estres(props: EstresProps) {
             </div>
           </>
         )}
+        <div className="mt-4">
+          <p>Tu puntaje actual es: {puntajeTotal}</p>
+        </div>
       </div>
     );
 }

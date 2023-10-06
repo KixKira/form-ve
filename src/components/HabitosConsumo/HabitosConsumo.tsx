@@ -31,6 +31,33 @@ export default function HabitosConsumo(props: HabitosConsumoProps) {
       setFrecuenciaAlcohol,
     } = props;
 
+    function puntajeConsumo() {
+      let points = 0
+      if (fumadorActivo.valueOf()) {
+        points += 1;
+      } 
+      if (tipoFumador.length === 1) {
+        points += 1;
+      } else if(tipoFumador.length > 1 ){
+        points += 2;
+      }
+      if (frecuenciaFumador.includes("DIARIO")) {
+        points += 2;
+      } else if (frecuenciaFumador.includes("OCASIONAL")) {
+        points += 1;
+      }
+      if (viveConFumador.valueOf()) {
+        points += 3;
+      }
+      if (frecuenciaAlcohol.includes("DIARIO")) {
+        points += 1;
+      }
+
+      return points;
+    }
+
+    const puntajeConsumoTotal = puntajeConsumo();
+
     return (
       <div className="sections">
         <h2 className="font-sans">Habitos de consumo</h2>
@@ -367,6 +394,9 @@ export default function HabitosConsumo(props: HabitosConsumoProps) {
             </div>
           </div>
         )}
+        <div className="mt-4">
+          <p>Tu puntaje es de: {puntajeConsumoTotal}</p>
+        </div>
       </div>
     );
 }

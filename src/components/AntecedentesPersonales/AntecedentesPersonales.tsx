@@ -62,6 +62,20 @@ export default function AntecedentesPersonales(props: AntecedentesPersonalesProp
     evento.stopPropagation();
   }
 
+  function puntajePersonales() {
+    if (enfermedades.includes("NINGUNA")) {
+      return 0;
+    } else if (enfermedades.length === 1) {
+      return 1;
+    } else if (enfermedades.length > 1 && !enfermedades.includes("NINGUNA")) {
+      return 2;
+    } else {
+      return 0;
+    }
+  }
+
+  const puntajePersonalesTotal = puntajePersonales();
+
   return (
     <div className="sections">
       <h2 className="font-sans">Antecedentes Personales</h2>
@@ -147,15 +161,15 @@ export default function AntecedentesPersonales(props: AntecedentesPersonalesProp
               type="checkbox"
               id="ninguna"
               value="NINGUNA"
-              onChange={(evento) =>
-                setEnfermedades((prevEnfermedades) =>
-                  prevEnfermedades.includes("NINGUNA")
-                    ? prevEnfermedades.filter(
-                        (enfermedad) => enfermedad !== "NINGUNA"
-                      )
-                    : ["NINGUNA"]
-                )
-              }
+              // onChange={(evento) =>
+              //   setEnfermedades((prevEnfermedades) =>
+              //     prevEnfermedades.includes("NINGUNA")
+              //       ? prevEnfermedades.filter(
+              //           (enfermedad) => enfermedad !== "NINGUNA"
+              //         )
+              //       : ["NINGUNA"]
+              //   )
+              // }
             />
             <label htmlFor="ninguna" className="label-checkbox font-sans">
               Ninguna
@@ -178,6 +192,9 @@ export default function AntecedentesPersonales(props: AntecedentesPersonalesProp
             </div>
           )}
         </div>
+      </div>
+      <div className="mt-4">
+        <p>Tu puntaje es de: {puntajePersonalesTotal}</p>
       </div>
     </div>
   );

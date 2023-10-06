@@ -31,6 +31,47 @@ export default function HabitosAlimenticion(props: HabitosAlimenticiosProps) {
       setProgramahabitosSaludables,
     } = props;
 
+    function puntajeAlimenticios() {
+      let points = 0;
+      if (comidasAlDia.includes("1")) {
+        points += 2;
+      } else if (comidasAlDia.includes("6")) {
+        points += 2
+      }
+      if (frecuenciaChatarra.includes("DIARIO")) {
+        points +=3
+      } else if (frecuenciaChatarra.includes("4")) {
+        points +=3
+      } else if (frecuenciaChatarra.includes("2")) {
+        points += 2
+      } else if (frecuenciaChatarra.includes("1")) {
+        points += 1
+      }
+      if (vasosAgua.includes("MENOS4")) {
+        points += 3
+      } else if (vasosAgua.includes("4")) {
+        points += 2
+      } else if (vasosAgua.includes("6")) {
+        points += 1
+      }
+      if (frecuenciaGolosinas.includes("DIARIO")) {
+        points += 3
+      } else if (frecuenciaGolosinas.includes("4")) {
+        points += 2
+      } else if (frecuenciaGolosinas.includes("2")) {
+        points += 1
+      }
+      if (dieta.includes("POCO")) {
+        points += 1
+      } else if (dieta.includes("NO")) {
+        points += 3
+      }
+
+      return points;
+    }
+
+    const puntajeAlimenticiosTotal = puntajeAlimenticios();
+
     return (
       <div className="sections">
         <h2 className="font-sans">Habitos Alimenticios y estilo de vida</h2>
@@ -441,6 +482,9 @@ export default function HabitosAlimenticion(props: HabitosAlimenticiosProps) {
               </div>
             </div>
           </div>
+        </div>
+        <div className="mt-4">
+          <p>Tu puntaje es de: {puntajeAlimenticiosTotal}</p>
         </div>
       </div>
     );

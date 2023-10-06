@@ -27,6 +27,22 @@ export default function ActividadFisica(props: ActividadFisicaProps) {
       setHorasActividadFisica,
     } = props;
 
+    function puntajeActividad() {
+      let points = 0
+      if (nivelActividadFisica.includes("SEDENTARIO")) {
+        points += 2
+      } else if (nivelActividadFisica.includes("MODERADO")) {
+        points += 1
+      }
+      if (!realizaActividadFisica.valueOf()) {
+        points += 2
+      }
+
+      return points;
+    }
+
+    const puntajeActividadTotal = puntajeActividad();
+
     return (
       <div className="sections">
         <h2 className="font-sans">Actividad fisica</h2>
@@ -294,6 +310,9 @@ export default function ActividadFisica(props: ActividadFisicaProps) {
             </div>
           </>
         )}
+        <div className="mt-4">
+          <p>Tu puntaje es de: {puntajeActividadTotal}</p>
+        </div>
       </div>
     );
 }

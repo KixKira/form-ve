@@ -27,6 +27,28 @@ export default function HabitosSuenos(props: HabitosSuenosProps) {
       setNombreMedicina,
     } = props;
 
+    function puntajeSueno() {
+      let points = 0
+      if (horasDuerme.includes("MENOS5")) {
+        points += 2
+      } else if (horasDuerme.includes("5")) {
+        points += 1
+      }
+      if (!descansado.valueOf()) {
+        points += 2
+      }
+      if (medicamentosDormir.valueOf()) {
+        points += 2
+      }
+      if (frecuenciaMedicina.includes("DIARIO")) {
+        points += 1;
+      }
+
+      return points;
+    }
+
+    const puntajeSuenoTotal = puntajeSueno();
+
     return (
       <div className="sections">
         <h2 className="font-sans">habitos de sueño</h2>
@@ -245,6 +267,9 @@ export default function HabitosSuenos(props: HabitosSuenosProps) {
             </div>
           </>
         )}
+        <div className="mt-4">
+          <p>Tu puntaje actual es: {puntajeSuenoTotal}</p>
+        </div>
       </div>
     );
 }

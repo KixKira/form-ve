@@ -11,6 +11,29 @@ export default function Bienestar(props: BienestarProps) {
   const { nivelBienestar, setNivelBienestar, nivelSalud, setNivelSalud } =
     props;
 
+    function puntajeBienestar() {
+      let points = 0
+      if (nivelBienestar.includes("BUENO")) {
+        points += 2;
+      } else if (nivelBienestar.includes("REGULAR")) {
+        points += 3;
+      } else if (nivelBienestar.includes("MALO")) {
+        points += 4;
+      }
+
+      if (nivelSalud.includes("BUENO")) {
+        points += 2;
+      } else if (nivelSalud.includes("REGULAR")) {
+        points += 3;
+      } else if (nivelSalud.includes("MALO")) {
+        points += 4;
+      }
+
+      return points;
+    }
+
+    const puntajeBienestarTotal = puntajeBienestar();
+
     return (
       <div className="sections">
         <h2 className="font-sans">Bienestar</h2>
@@ -167,6 +190,9 @@ export default function Bienestar(props: BienestarProps) {
               </div>
             </div>
           </div>
+        </div>
+        <div className="mt-4">
+          <p>Tu puntaje es de: {puntajeBienestarTotal}</p>
         </div>
       </div>
     );
